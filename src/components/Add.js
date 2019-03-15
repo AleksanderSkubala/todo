@@ -43,7 +43,7 @@ const Input = styled.input`
     }
 
     ::placeholder {
-        color: ${({theme})=>theme.colors.black};
+        color: ${({theme})=>theme.colors.gray};
         font-weight: ${({theme})=>theme.fonts.semiBold};
     }
 `
@@ -133,7 +133,25 @@ class Add extends React.Component {
         this.setState({
           [name]: value,
         });
-      }
+    }
+
+    pushData() {
+        const data = {
+            title: this.state.title,
+            description: this.state.description,
+            date: this.state.date,
+        };
+
+        //emit data
+    }
+
+    clearData() {
+        this.setState({
+            title: '',
+            description: '',
+            date: '',
+        });
+    }
 
     render () {
         return (
@@ -150,10 +168,10 @@ class Add extends React.Component {
                     <ButtonMore as={Button} onClick={this.toggleShow.bind(this)}>
                         <i className="material-icons">more_horiz</i>
                     </ButtonMore>
-                    <ButtonAdd as={Button}>
+                    <ButtonAdd as={Button} onClick={this.pushData.bind(this)}>
                         <i className="material-icons">add</i>
                     </ButtonAdd>
-                    <ButtonCancel as={Button}>
+                    <ButtonCancel as={Button} onClick={this.clearData.bind(this)}>
                             <i className="material-icons">clear</i>
                     </ButtonCancel>
                 </InputWrapper>
@@ -183,9 +201,9 @@ class Add extends React.Component {
                         </ButtonCancel> */}
                     </Row>
                 </MoreInfo>
-                {this.state.title}
-                {this.state.description}
-                {this.state.date}
+                {this.state.title}<br />
+                {this.state.description}<br />
+                {this.state.date}<br />
             </AddWrapper>
             </>
         )
